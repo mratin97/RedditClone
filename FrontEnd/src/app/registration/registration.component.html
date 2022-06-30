@@ -1,0 +1,29 @@
+<form class="w-25 m-auto" #signupForm="ngForm" (ngSubmit)="registration(signupForm)">
+    <h2>Register</h2>
+    <div class="mb-3">
+        <label for="inputEmail" class="form-label">UserName</label>
+        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="username" ngModel>
+    </div>
+    <div class="mb-3">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword" name="password" ngModel>
+    </div>  
+    <div class="mb-3">
+        <label for="inputConfirmPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputConfirmPassword">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="description" class="form-control" id="inputDescription" name="description" ngModel>
+    </div>  
+    <div class="mb-3">
+        <label for="displayName" class="form-label">Display Name</label>
+        <input type="displayName" class="form-control" id="inputDisplayName" name="displayName" ngModel>
+    </div>  
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="Email" class="form-control" id="inputEmail" name="email" ngModel>
+    </div>  
+    <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+    <button routerLink="/login" type="submit" class="btn btn-secondary ml-2">I already have an account</button>
+  </form>

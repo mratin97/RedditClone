@@ -1,0 +1,14 @@
+<form class="w-25 m-auto" #signupForm="ngForm" (ngSubmit)="addCommunity(signupForm)">
+    <h2>Add Community</h2>
+    <div class="mb-3">
+        <label for="inputName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="inputName" aria-describedby="name" name="name" ngModel>
+    </div>
+    <div class="mb-3">
+        <label for="inputDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="inputDescription" name="description" ngModel>
+    </div>  
+   
+    <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Submit</button>
+    
+  </form>

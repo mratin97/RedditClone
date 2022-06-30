@@ -1,0 +1,36 @@
+<div>Title:{{post?.title}}<br> Text:{{post?.text}} <br> Post Karma:{{n}}</div>
+
+
+
+
+Posts<button type="button" class="btn btn-info"  (click)="showAddComment()" showAddPost>add Comment</button>
+<br>
+
+
+<div id="addComment" style="display: none;" div class="bg-light p-4 rounded" >
+    <h2>Add new Post</h2>
+    <form  (ngSubmit)="addComment()">
+      <div class="row mb-3">
+        <label for="inputTitle" class="col-sm-2 col-form-label">Text</label>
+        <div class="col-sm-10">
+          <input [(ngModel)]="commentDTO1.text" type="text" id="inputTitle" class="form-control" placeholder="Enter Text" name="title" ngModel>
+        </div>
+    
+      
+        <button type="button" class="btn btn-primary" style="float: right;">Cancel</button>
+      </div>
+      <div class="col-11">
+        <button type="submit" class="btn btn-primary" style="float: right;" >Confirm</button>
+      </div>
+  </form>
+  </div>
+Comments
+<div *ngFor = "let comment of comments" >
+
+    
+    {{comment.id}}
+    {{comment.text}}
+    {{comment.user}}
+    
+
+</div>

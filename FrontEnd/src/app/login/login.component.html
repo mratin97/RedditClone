@@ -1,0 +1,17 @@
+<form class="p-3 rounded" style="background-color: white;" #signupForm="ngForm" (ngSubmit)="login(signupForm)">
+    <h2 style="color: black;">Login</h2>
+    <div class="mb-3">
+      <label style="color: black;" for="inputEmail1" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="username" ngModel>
+    </div>
+    <div class="mb-3">
+      <label style="color: black;" for="inputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputPassword" name="password" ngModel>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="rememberCheck">
+      <label class="form-check-label" for="rememberCheck">Remember me.</label>
+    </div>
+    <button type="submit" class="btn btn-primary btn-pill" style="margin-right: 5px;">Submit</button>
+    <button routerLink="/register" type="button" class="btn btn-secondary">Don't have an account?</button>    
+  </form>

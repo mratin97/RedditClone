@@ -1,0 +1,74 @@
+<div>Name:{{community?.name}}<br>Description:{{community?.description}}</div>
+
+
+
+Posts<button type="button" class="btn btn-info"  (click)="showAddPost()" showAddPost>add Post</button>
+ <button type="button" class="btn btn-info" (click)=" showEditCommunity()" > Edit Community</button>
+
+
+
+
+<!-- <div id="addCommunity" style="display: none;" div class="bg-light p-4 rounded" >
+  <h2>Edit Community</h2>
+  <form   (ngSubmit)="editCommunity(communityEd)">
+    <div class="row mb-3">
+      <label for="inputdescription" class="col-sm-2 col-form-label">description</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="communityEd.description" type="text" id="inputdescription" class="form-control" placeholder="Enterdescription" name="description" ngModel>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="community.name" type="text" id="inputName" class="form-control" placeholder="Enter name" name="name"ngModel >
+      </div>
+    </div>
+    
+    
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" style="float: right;">Cancel</button>
+    </div>
+    <div class="col-11">
+      <button type="submit" class="btn btn-primary" style="float: right;" >Confirm</button>
+    </div>
+</form>
+</div> --> 
+
+<div id="addPost" style="display: none;" div class="bg-light p-4 rounded" >
+  <h2>Add new Post</h2>
+  <form  (ngSubmit)="addPost()">
+    <div class="row mb-3">
+      <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="post1.title" type="text" id="inputTitle" class="form-control" placeholder="Enter Title" name="title" ngModel>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputText" class="col-sm-2 col-form-label">Text</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="post1.text" type="text" id="inputText" class="form-control" placeholder="Enter Text" name="text"ngModel >
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="button" class="btn btn-primary" style="float: right;">Cancel</button>
+    </div>
+    <div class="col-11">
+      <button type="submit" class="btn btn-primary" style="float: right;" >Confirm</button>
+    </div>
+</form>
+</div>
+<div id="showPosts" *ngFor = "let post of posts" style="display: block;" >
+
+   
+    {{post.id}}
+    {{post.title}}
+    {{post.text}}<br>
+    
+    <button type="button" class="btn btn-info" (click)="openPost(post)" >OpenPost</button>
+    <button type="button" class="btn btn-info" (click)="upKarma(post)" >UpVote</button>
+    <button type="button" class="btn btn-info" (click)="downKarma(post)" >DownVote</button>
+    <button type="button" class="btn btn-info" (click)="removePost(post)" >DeletePost</button>
+</div>
+
+
+
