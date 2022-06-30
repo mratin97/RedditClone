@@ -15,15 +15,15 @@ export class CommentDTOComponent implements OnInit {
   
   ngOnInit(): void {
 
-    this.activeRoute.data.subscribe((data:{commenDTO?:CommentDTO}) => {
-      if(data.commenDTO==undefined || data.commenDTO== null){
+    this.activeRoute.data.subscribe((data:{commentDTO?:CommentDTO}) => {
+      if(data.commentDTO==undefined || data.commentDTO== null){
 
         console.error();
 
       } 
 
-      console.log(data.commenDTO);
-      this.commentDTO=data.commenDTO;
+      console.log(data.commentDTO);
+      this.commentDTO=data.commentDTO;
  
 
     })
