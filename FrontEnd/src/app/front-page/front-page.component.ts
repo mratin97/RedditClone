@@ -113,7 +113,7 @@ addPost(community1: Community){
 editCommunity(community1:Community){
   
   
-  this.homeService.addCommunity(community1).subscribe((result) => {
+  this.homeService.editCommunity(community1).subscribe((result) => {
     if(result){
       this.post=new Post();
       this.route.routeReuseStrategy.shouldReuseRoute = () => false;

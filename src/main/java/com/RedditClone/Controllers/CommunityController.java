@@ -68,13 +68,15 @@ public class CommunityController {
     public @ResponseBody ResponseEntity<?> editCommunity(@RequestBody Community community ,@AuthenticationPrincipal UserDetails userDetails){
         Community com=communityRepository.getById(community.getId());
         User user= userRepository.findByUsername(userDetails.getUsername());
-        if(user==com.getModerator().getUser()) {
+        if(user.getId()==com.getModerator().getUser().getId()) {
             communityService.editCommunity(community);
+
+            return new ResponseEntity(community, HttpStatus.OK);
         }
-        else {}
+        else  return  ResponseEntity.badRequest().build();
 
 
-        return new ResponseEntity(community, HttpStatus.OK);
+
 
     }
 
