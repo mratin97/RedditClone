@@ -246,7 +246,7 @@ export class HomeService {
     return this.httpClient.post<Reaction>(this.URL5,post,requestOptions);
   }
 
-  upKarmaComment(commenDTO:CommentDTO): Observable<CommentDTO>{
+  upKarmaComment(commentDTO:CommentDTO): Observable<CommentDTO>{
     const headInfo = {
       'Content-Type': 'application/json',
       'X-Auth-Token': "" + this.authService.getToken()
@@ -255,9 +255,9 @@ export class HomeService {
     const requestOptions = {
       headers: new HttpHeaders(headInfo)
     };
-    return this.httpClient.post<CommentDTO>(this.URL55,commenDTO,requestOptions);
+    return this.httpClient.post<CommentDTO>(this.URL55,commentDTO,requestOptions);
   }
-  downKarmaComment(commenDTO:CommentDTO): Observable<CommentDTO>{
+  downKarmaComment(commentDTO:CommentDTO): Observable<CommentDTO>{
     const headInfo = {
       'Content-Type': 'application/json',
       'X-Auth-Token': "" + this.authService.getToken()
@@ -266,7 +266,7 @@ export class HomeService {
     const requestOptions = {
       headers: new HttpHeaders(headInfo)
     };
-    return this.httpClient.post<CommentDTO>(this.URL66,commenDTO,requestOptions);
+    return this.httpClient.post<CommentDTO>(this.URL66,commentDTO,requestOptions);
   }
 
   downKarma(post:Post): Observable<Reaction>{

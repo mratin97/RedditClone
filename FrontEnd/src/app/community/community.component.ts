@@ -161,7 +161,7 @@ public showEditCommunity(): void {
   editCommunity(community:any){
   
   
-    this.homeService.addCommunity(community).subscribe((result) => {
+    this.homeService.editCommunity(community).subscribe((result) => {
       if(result){
         this.post=new Post();
         this.route.routeReuseStrategy.shouldReuseRoute = () => false;

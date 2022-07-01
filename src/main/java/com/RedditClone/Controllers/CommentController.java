@@ -42,6 +42,7 @@ public class CommentController {
     @PostMapping(path = "/api/comment")
     public @ResponseBody ResponseEntity<?> addComment(@RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails){
         User user=userRepository.findByUsername(userDetails.getUsername());
+        comment.setTimestamp(LocalDate.now());
         commentService.addComment(comment,user);
         //addReactUpVoteCom(comment,userDetails);
 
@@ -51,14 +52,18 @@ public class CommentController {
 
 
     @DeleteMapping(path ="/comment/{id}")
-    public ResponseEntity<Void> deleteComment(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteComment(@PathVariable("id") Long id,@AuthenticationPrincipal UserDetails userDetails) {
         Comment comment = commentRepository.getById(id);
-        if (comment == null) {
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+        if(comment.getUser().getId()== userRepository.findByUsername(userDetails.getUsername()).getId()) {
+            if (comment == null) {
+                return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+            }
+            commentService.deleteComment(comment);
+            return new ResponseEntity<Void>(HttpStatus.OK);
         }
-        commentService.deleteComment(comment);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
+
+        return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);}
+
 
     @GetMapping(path="/comment/{id}")
     public @ResponseBody ResponseEntity<?> getAllCommunity(@PathVariable("id") Long id){

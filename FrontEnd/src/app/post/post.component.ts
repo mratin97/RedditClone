@@ -28,7 +28,7 @@ export class PostComponent implements OnInit {
       console.log(data.post);
       this.post=data.post  ? data.post : new Post();;
       this.homeService.getComment(data.post).subscribe((comments) => (this.comments=comments));
-      this.homeService.getPostKarma(data.post).subscribe((n) => (this.n=n));
+     
 
     })
   }
@@ -40,6 +40,18 @@ export class PostComponent implements OnInit {
     
        
 }
+removeComment(commenDTO:CommentDTO){;
+  this.homeService.deleteComment(commenDTO).subscribe((result) => {
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.onSameUrlNavigation = 'reload';
+    this.route.navigate(['/home']);
+  
+  } ,(error)=>{
+  console.log(error);
+  });
+
+}
+
  public openPost(post: Post){
   
       
@@ -79,11 +91,11 @@ addComment(){
 
 
 
-public openComment(commenDTO: CommentDTO){
+public openComment(commentDTO1: CommentDTO){
   
       
-  this.homeService.getComment(commenDTO).subscribe((comments) => (this.comments=comments));
-  this.route.navigate([`/comment/${commenDTO?.id}`]);
+  this.homeService.getComment(commentDTO1).subscribe((comments) => (this.comments=comments));
+  this.route.navigate([`/comment/${commentDTO1?.id}`]);
 
 
 }

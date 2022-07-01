@@ -121,7 +121,7 @@ public class PostController {
     public @ResponseBody ResponseEntity<?> addReactDownVoteCom(@RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails) {
         List<Reaction> reactions=reactionRepository.findAll();
         for(Reaction react : reactions){
-            if(react.getUser()==userRepository.findByUsername(userDetails.getUsername()) && react.getComment()==comment ){
+            if(react.getUser()==userRepository.findByUsername(userDetails.getUsername()) && react.getComment().getId()==comment.getId() ){
 
                 if(react.getType()==ReactionType.UPVOTE){
 
@@ -149,8 +149,8 @@ public class PostController {
     public @ResponseBody ResponseEntity<?> addReactUpVoteCom(@RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails) {
         List<Reaction> reactions=reactionRepository.findAll();
         for(Reaction react : reactions){
-            if(react.getUser()==userRepository.findByUsername(userDetails.getUsername())&& react.getComment()==comment){
-                if(react.getType()==ReactionType.UPVOTE){
+            if(react.getUser()==userRepository.findByUsername(userDetails.getUsername())&& react.getComment().getId()==comment.getId()){
+                if(react.getType()==ReactionType.DOWNVOTE){
 
                     reactionRepository.delete(react);
                     return new ResponseEntity(react, HttpStatus.OK);
@@ -204,7 +204,7 @@ public class PostController {
         return new ResponseEntity(n, HttpStatus.OK);
     }
 
-    @GetMapping(path="/commentKarma")
+    @GetMapping(path="/commentKarma/{id}")
     public @ResponseBody ResponseEntity<?> getKarmaComment(@PathVariable("id") Long id){
         List<Reaction> reactions=reactionRepository.findAll();
         int n=0;

@@ -76,7 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
                 .antMatchers(HttpMethod.POST,"/api/comment","/api/communityEdit","/api/community","/api/reactUpComment","/api/reactDownComment","/api/reactDownPost","/api/reactUpPost","/api/comment").hasRole("MODERATOR")
                 .antMatchers(HttpMethod.POST, "/api/user","/api/login","/api/community","/api/editUser").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/reactUpComment","/api/reactDownComment","/api/reactDownPost","/api/reactUpPost","/api/community","/api/post","/api/comment" ).authenticated()
-                .antMatchers(HttpMethod.DELETE,"/**").hasRole("MODERATOR")
+                .antMatchers(HttpMethod.DELETE,"/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
                 .anyRequest().authenticated();
         httpSecurity.cors();

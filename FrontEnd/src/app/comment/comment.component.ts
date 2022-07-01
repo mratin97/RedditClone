@@ -24,7 +24,7 @@ export class CommentDTOComponent implements OnInit {
 
       console.log(data.commentDTO);
       this.commentDTO=data.commentDTO ? data.commentDTO : new CommentDTO();;
-      this.homeService.getPostKarma(data.commentDTO).subscribe((n) => (this.n=n));
+      this.homeService.getCommentKarma(data.commentDTO).subscribe((n) => (this.n=n));
 
     })
     
