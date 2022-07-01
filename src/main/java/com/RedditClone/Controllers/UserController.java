@@ -6,6 +6,8 @@ import com.RedditClone.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ public class UserController {
 
         return new ResponseEntity(userService.findById(1L), HttpStatus.OK);
     }
+
+
 
     @PostMapping(path = "/api/user")
     public @ResponseBody ResponseEntity<?> addUser(@RequestBody User user/* @AuthenticationPrincipal UserDetails userDetails*/){
@@ -40,4 +44,8 @@ public class UserController {
         return new ResponseEntity(user, HttpStatus.OK);
 
     }
+
+
+
+
 }

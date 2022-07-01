@@ -9,6 +9,7 @@ import com.RedditClone.Repositorys.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class PostService {
         Post newPost= new Post();
 
         newPost.setFlair(post.getFlair());
-        newPost.setCreationDate(post.getCreationDate());
+        newPost.setCreationDate(LocalDate.now());
         newPost.setText(post.getText());
         newPost.setUser(user);
         newPost.setCommunity(newPost.getCommunity());

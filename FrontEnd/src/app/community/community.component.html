@@ -8,13 +8,13 @@ Posts<button type="button" class="btn btn-info"  (click)="showAddPost()" showAdd
 
 
 
-<!-- <div id="addCommunity" style="display: none;" div class="bg-light p-4 rounded" >
+ <div id="addCommunity" style="display: none;" div class="bg-light p-4 rounded" >
   <h2>Edit Community</h2>
-  <form   (ngSubmit)="editCommunity(communityEd)">
+  <form   (ngSubmit)="editCommunity(community)">
     <div class="row mb-3">
       <label for="inputdescription" class="col-sm-2 col-form-label">description</label>
       <div class="col-sm-10">
-        <input [(ngModel)]="communityEd.description" type="text" id="inputdescription" class="form-control" placeholder="Enterdescription" name="description" ngModel>
+        <input [(ngModel)]="community.description" type="text" id="inputdescription" class="form-control" placeholder="Enterdescription" name="description" ngModel>
       </div>
     </div>
     <div class="row mb-3">
@@ -32,7 +32,7 @@ Posts<button type="button" class="btn btn-info"  (click)="showAddPost()" showAdd
       <button type="submit" class="btn btn-primary" style="float: right;" >Confirm</button>
     </div>
 </form>
-</div> --> 
+</div> 
 
 <div id="addPost" style="display: none;" div class="bg-light p-4 rounded" >
   <h2>Add new Post</h2>

@@ -57,7 +57,11 @@ public class PostController {
         List<Reaction> reactions=reactionRepository.findAll();
         for(Reaction react : reactions){
             if(react.getUser()==userRepository.findByUsername(userDetails.getUsername()) && react.getPost().getId()==post.getId()){
+                if(react.getType()==ReactionType.DOWNVOTE){
 
+                    reactionRepository.delete(react);
+                    return new ResponseEntity(react, HttpStatus.OK);
+                }
                 return  ResponseEntity.badRequest().build();
             }
 
@@ -79,7 +83,11 @@ public class PostController {
         List<Reaction> reactions=reactionRepository.findAll();
         for(Reaction react : reactions){
             if(react.getUser()==userRepository.findByUsername(userDetails.getUsername()) && react.getPost().getId()==post.getId()){
+                if(react.getType()==ReactionType.UPVOTE){
 
+                    reactionRepository.delete(react);
+                    return new ResponseEntity(react, HttpStatus.OK);
+                }
                 return  ResponseEntity.badRequest().build();
             }
 

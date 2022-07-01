@@ -28,6 +28,7 @@ public class Comment {
     @Column(name="isDeleted")
     private boolean isDeleted;
 
+
     @JsonBackReference(value="postRef")
     @ManyToOne
     @JoinColumn(name="Post_id", referencedColumnName = "id")

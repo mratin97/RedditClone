@@ -58,8 +58,8 @@ public class CommunityController {
         Moderator moderator= new Moderator(moderatorRepository.count()+1L,user);
         moderatorService.saveModerator(moderator);
         community.setModerator(moderator);
-        communityService.saveCommunity(community);
         community.setCreationDate(LocalDate.now());
+        communityService.saveCommunity(community);
         return new ResponseEntity(community, HttpStatus.OK);
 
     }

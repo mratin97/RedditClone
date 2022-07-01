@@ -12,9 +12,12 @@ import { AuthenticationServiceService } from '../servisi.service';
   styleUrls: ['./community.component.css']
 })
 export class CommunityComponent implements OnInit {
-  community?:Community;
-  constructor(private activeRoute: ActivatedRoute,private homeService:HomeService, private authenticationService: AuthenticationServiceService,private route: Router ) { }
-  
+  community=new Community();
+  constructor(private activeRoute: ActivatedRoute,private homeService:HomeService, private authenticationService: AuthenticationServiceService,private route: Router ) {
+    
+
+  }
+ 
   ngOnInit(): void {
 
     this.activeRoute.data.subscribe((data:{community?:Community}) => {
@@ -25,7 +28,7 @@ export class CommunityComponent implements OnInit {
       } 
 
       console.log(data.community);
-      this.community=data.community;
+      this.community=data.community ? data.community : new Community();
       this.homeService.getAllCommunityPosts(data.community).subscribe((posts) => (this.posts= posts));
     
 
@@ -155,10 +158,10 @@ public showEditCommunity(): void {
     return this.community1
   }
   communityEd?=this.getCurrentCommunity();
-  editCommunity(communityEd:Community){
+  editCommunity(community:any){
   
   
-    this.homeService.addCommunity(communityEd).subscribe((result) => {
+    this.homeService.addCommunity(community).subscribe((result) => {
       if(result){
         this.post=new Post();
         this.route.routeReuseStrategy.shouldReuseRoute = () => false;
