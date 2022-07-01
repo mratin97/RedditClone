@@ -123,6 +123,11 @@ public class PostController {
         for(Reaction react : reactions){
             if(react.getUser()==userRepository.findByUsername(userDetails.getUsername()) && react.getComment()==comment ){
 
+                if(react.getType()==ReactionType.UPVOTE){
+
+                    reactionRepository.delete(react);
+                    return new ResponseEntity(react, HttpStatus.OK);
+                }
                 return  ResponseEntity.badRequest().build();
             }
 
@@ -142,23 +147,27 @@ public class PostController {
 
     @PostMapping(path = "/api/reactUpComment")
     public @ResponseBody ResponseEntity<?> addReactUpVoteCom(@RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails) {
-       List<Reaction> reactions=reactionRepository.findAll();
-       for(Reaction react : reactions){
-           if(react.getUser()==userRepository.findByUsername(userDetails.getUsername())&& react.getComment()==comment){
+        List<Reaction> reactions=reactionRepository.findAll();
+        for(Reaction react : reactions){
+            if(react.getUser()==userRepository.findByUsername(userDetails.getUsername())&& react.getComment()==comment){
+                if(react.getType()==ReactionType.UPVOTE){
 
-               return  ResponseEntity.badRequest().build();
-           }
+                    reactionRepository.delete(react);
+                    return new ResponseEntity(react, HttpStatus.OK);
+                }
+                return  ResponseEntity.badRequest().build();
+            }
 
 
-       }
-            Reaction reaction = new Reaction();
-            Long commentId = comment.getId();
-            reaction.setComment(commentRepository.getById(commentId));
-            reaction.setTimestamp(LocalDate.now());
-            reaction.setUser(userRepository.findByUsername(userDetails.getUsername()));
-            reaction.setType(ReactionType.UPVOTE);
-            reactionRepository.save(reaction);
-            return new ResponseEntity(reaction, HttpStatus.OK);
+        }
+        Reaction reaction = new Reaction();
+        Long commentId = comment.getId();
+        reaction.setComment(commentRepository.getById(commentId));
+        reaction.setTimestamp(LocalDate.now());
+        reaction.setUser(userRepository.findByUsername(userDetails.getUsername()));
+        reaction.setType(ReactionType.UPVOTE);
+        reactionRepository.save(reaction);
+        return new ResponseEntity(reaction, HttpStatus.OK);
 
     }
 
@@ -196,12 +205,12 @@ public class PostController {
     }
 
     @GetMapping(path="/commentKarma")
-    public @ResponseBody ResponseEntity<?> getKarmaComment(@RequestBody Comment comment){
+    public @ResponseBody ResponseEntity<?> getKarmaComment(@PathVariable("id") Long id){
         List<Reaction> reactions=reactionRepository.findAll();
         int n=0;
         for(Reaction reaction:reactions){
 
-            if(reaction.getComment()==commentRepository.getById(comment.getId())){
+            if(reaction.getComment()==commentRepository.getById(id)){
 
                 if(reaction.getType()==ReactionType.UPVOTE){
                     n++;

@@ -58,6 +58,8 @@ Comments
     {{comment.id}}
     {{comment.text}}
     {{comment.user}}
+    <button type="button" class="btn btn-info" (click)="upKarma(post)" >UpVote</button>
+    <button type="button" class="btn btn-info" (click)="downKarma(post)" >DownVote</button>
     <button type="button" class="btn btn-info"  (click)="openComment(comment)" showAddPost>open Comment</button>
 
 </div>

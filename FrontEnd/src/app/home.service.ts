@@ -21,8 +21,11 @@ export class HomeService {
   private readonly URL2 = "http://localhost:8081/post";
   private readonly URL3 = "http://localhost:8081/api/post";
   private readonly URL4 = "http://localhost:8081/postKarma";
+  private readonly URL44 = "http://localhost:8081/commentKarma";
   private readonly URL5 = "http://localhost:8081/api/reactUpPost"
+  private readonly URL55 = "http://localhost:8081/api/reactUpComment"
   private readonly URL6 = "http://localhost:8081/api/reactDownPost"
+  private readonly URL66 = "http://localhost:8081/api/reactDownComment"
   private readonly URL7 = "http://localhost:8081/api/community"
   private readonly URL8 = "http://localhost:8081/api/communityEdit"
   private readonly URL9 = "http://localhost:8081/api/editUser"
@@ -127,7 +130,19 @@ export class HomeService {
     const url = `${this.URL4}/${post?.id}`;
     return this.httpClient.get<number>(url,requestOptions);
   }
-
+  getCommentKarma(commenDTO?:CommentDTO): Observable<number> {
+    const headInfo = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': "" + this.authService.getToken()
+      
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headInfo)
+    };
+    console.log(commenDTO);
+    const url = `${this.URL44}/${commenDTO?.id}`;
+    return this.httpClient.get<number>(url,requestOptions);
+  }
   addPost(post:Post): Observable<Post>{
     const headInfo = {
       'Content-Type': 'application/json',
@@ -229,6 +244,29 @@ export class HomeService {
       headers: new HttpHeaders(headInfo)
     };
     return this.httpClient.post<Reaction>(this.URL5,post,requestOptions);
+  }
+
+  upKarmaComment(commenDTO:CommentDTO): Observable<CommentDTO>{
+    const headInfo = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': "" + this.authService.getToken()
+      
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headInfo)
+    };
+    return this.httpClient.post<CommentDTO>(this.URL55,commenDTO,requestOptions);
+  }
+  downKarmaComment(commenDTO:CommentDTO): Observable<CommentDTO>{
+    const headInfo = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': "" + this.authService.getToken()
+      
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headInfo)
+    };
+    return this.httpClient.post<CommentDTO>(this.URL66,commenDTO,requestOptions);
   }
 
   downKarma(post:Post): Observable<Reaction>{

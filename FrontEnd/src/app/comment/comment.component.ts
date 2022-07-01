@@ -12,7 +12,7 @@ import { AuthenticationServiceService } from '../servisi.service';
 export class CommentDTOComponent implements OnInit {
   commentDTO=new CommentDTO();
   constructor(private activeRoute: ActivatedRoute,private homeService:HomeService, private authenticationService: AuthenticationServiceService,private route: Router ) { }
-  
+  n?:number;
   ngOnInit(): void {
 
     this.activeRoute.data.subscribe((data:{commentDTO?:CommentDTO}) => {
@@ -24,7 +24,7 @@ export class CommentDTOComponent implements OnInit {
 
       console.log(data.commentDTO);
       this.commentDTO=data.commentDTO ? data.commentDTO : new CommentDTO();;
- 
+      this.homeService.getPostKarma(data.commentDTO).subscribe((n) => (this.n=n));
 
     })
     

@@ -109,4 +109,29 @@ editPost(post:any){
     }
   });
 }
+
+
+
+public upKarma(commenDTO:CommentDTO){
+  
+  console.log(commenDTO);
+  this.homeService.upKarmaComment(commenDTO).subscribe((result) => {
+    if(result){
+      this.commentDTO1=new CommentDTO();
+      this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+      
+    }
+  });
+  
+}
+public downKarma(commenDTO:CommentDTO){
+  this.homeService.downKarmaComment(commenDTO).subscribe((result) => {
+    if(result){
+      this.commentDTO1=new CommentDTO();
+      this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+      
+    }
+  });
+  
+}
 }
