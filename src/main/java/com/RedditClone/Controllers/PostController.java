@@ -50,7 +50,21 @@ public class PostController {
         addReactUpVote(post,userDetails);
         return new ResponseEntity(post, HttpStatus.OK);
     }
+    @PostMapping(path = "/api/postEdit")
+    public @ResponseBody ResponseEntity<?> editCommunity(@RequestBody Post post ,@AuthenticationPrincipal UserDetails userDetails){
+        Post post1=postRepository.getById(post.getId());
+        User user= userRepository.findByUsername(userDetails.getUsername());
+        if(user.getId()==post1.getUser().getId()) {
+            postService.updPost(post);
 
+            return new ResponseEntity(post, HttpStatus.OK);
+        }
+        else  return  ResponseEntity.badRequest().build();
+
+
+
+
+    }
 
     @PostMapping(path = "/api/reactUpPost")
     public @ResponseBody ResponseEntity<?> addReactUpVote(@RequestBody Post post, @AuthenticationPrincipal UserDetails userDetails) {

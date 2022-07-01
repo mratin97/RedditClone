@@ -67,4 +67,23 @@ public class CommentController {
 
     }
 
+    @PostMapping(path = "/api/commentEdit")
+    public @ResponseBody ResponseEntity<?> editCommunity(@RequestBody Comment comment ,@AuthenticationPrincipal UserDetails userDetails){
+        Comment comment1=commentRepository.getById(comment.getId());
+        User user= userRepository.findByUsername(userDetails.getUsername());
+        if(user.getId()==comment1.getUser().getId()) {
+            commentService.updPost(comment);
+
+            return new ResponseEntity(comment, HttpStatus.OK);
+        }
+        else  return  ResponseEntity.badRequest().build();
+
+
+
+
+    }
+
+
+    
+
 }

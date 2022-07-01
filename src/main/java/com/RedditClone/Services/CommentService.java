@@ -28,6 +28,16 @@ public class CommentService {
         commentRepository.delete(comment);
 
     }
+    public void updPost(Comment comment){
 
+        Comment newCommnet= commentRepository.getById(comment.getId());
+
+
+
+        newCommnet.setText(comment.getText());
+
+        commentRepository.save(newCommnet);
+
+    }
 
 }

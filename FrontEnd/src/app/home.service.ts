@@ -28,8 +28,8 @@ export class HomeService {
   private readonly URL9 = "http://localhost:8081/api/editUser"
   private readonly URL10 = "http://localhost:8081/comment"
   private readonly URL11 = "http://localhost:8081/api/comment"
-
-
+  private readonly URL12 = "http://localhost:8081/api/postEdit"
+  private readonly URL13 = "http://localhost:8081/api/commentEdit"
 
   getAll(): Observable<Community[]> {
     const headInfo = {
@@ -179,6 +179,33 @@ export class HomeService {
     };
     return this.httpClient.post<Community>(this.URL8,community,requestOptions);
   }
+
+
+  editPost(post?:Post): Observable<Post>{
+    const headInfo = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': "" + this.authService.getToken()
+      
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headInfo)
+    };
+    return this.httpClient.post<Post>(this.URL12,post,requestOptions);
+  }
+
+
+  editComment(commenDTO?:CommentDTO): Observable<CommentDTO>{
+    const headInfo = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': "" + this.authService.getToken()
+      
+    }
+    const requestOptions = {
+      headers: new HttpHeaders(headInfo)
+    };
+    return this.httpClient.post<CommentDTO>(this.URL13,commenDTO,requestOptions);
+  }
+
 
   editUser(user:User): Observable<User>{
     const headInfo = {

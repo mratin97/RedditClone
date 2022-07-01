@@ -1,1 +1,23 @@
 <div>Komentar:<br>{{commentDTO?.text}}<br></div>
+<button type="button" class="btn btn-info" (click)=" showEditComment()" > Edit Comment</button>
+
+<div id="editComment" style="display: none;" div class="bg-light p-4 rounded" >
+    <h2>Edit Comment</h2>
+    <form   (ngSubmit)="editComment(commentDTO)">
+      
+      <div class="row mb-3">
+        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <input [(ngModel)]="commentDTO.text" type="text" id="inputName" class="form-control" placeholder="Enter name" name="name"ngModel >
+        </div>
+      </div>
+      
+      
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" style="float: right;">Cancel</button>
+      </div>
+      <div class="col-11">
+        <button type="submit" class="btn btn-primary" style="float: right;" >Confirm</button>
+      </div>
+  </form>
+  </div> 

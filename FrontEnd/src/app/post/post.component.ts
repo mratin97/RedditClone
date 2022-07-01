@@ -11,7 +11,7 @@ import { AuthenticationServiceService } from '../servisi.service';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post?:Post;
+  post=new Post();
   n?:number;
   comments?:CommentDTO[];
   constructor(private activeRoute: ActivatedRoute,private homeService:HomeService, private authenticationService: AuthenticationServiceService,private route: Router) { }
@@ -26,7 +26,7 @@ export class PostComponent implements OnInit {
       } 
 
       console.log(data.post);
-      this.post=data.post;
+      this.post=data.post  ? data.post : new Post();;
       this.homeService.getComment(data.post).subscribe((comments) => (this.comments=comments));
       this.homeService.getPostKarma(data.post).subscribe((n) => (this.n=n));
 
@@ -40,17 +40,14 @@ export class PostComponent implements OnInit {
     
        
 }
-
-  public openPost(post: Post){
-
-    
+ public openPost(post: Post){
+  
+      
     this.homeService.getComment(post).subscribe((comments) => (this.comments=comments));
-    
+    this.route.navigate([`/post/${post?.id}`]);
   
   
   }
-
-
 
   public showAddComment(): void {
     console.log("a");
@@ -91,4 +88,25 @@ public openComment(commenDTO: CommentDTO){
 
 }
 
+
+public showEditPost(): void {
+  console.log("a");
+  let x = document.getElementById("editPost");
+  if (x!.style.display === "none") {
+    x!.style.display = "block";
+  } else {
+    x!.style.display = "none";
+  }
+}
+editPost(post:any){
+  
+  
+  this.homeService.editPost(post).subscribe((result) => {
+    if(result){
+      this.post=new Post();
+      this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+      
+    }
+  });
+}
 }

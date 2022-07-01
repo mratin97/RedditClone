@@ -10,7 +10,7 @@ import { AuthenticationServiceService } from '../servisi.service';
   styleUrls: ['./comment.component.css']
 })
 export class CommentDTOComponent implements OnInit {
-  commentDTO?:CommentDTO;
+  commentDTO=new CommentDTO();
   constructor(private activeRoute: ActivatedRoute,private homeService:HomeService, private authenticationService: AuthenticationServiceService,private route: Router ) { }
   
   ngOnInit(): void {
@@ -23,13 +23,38 @@ export class CommentDTOComponent implements OnInit {
       } 
 
       console.log(data.commentDTO);
-      this.commentDTO=data.commentDTO;
+      this.commentDTO=data.commentDTO ? data.commentDTO : new CommentDTO();;
  
 
     })
-
+    
     
 
 
+  }
+  public showEditComment(): void {
+    console.log("a");
+    let x = document.getElementById("editComment");
+    
+    if (x!.style.display === "none") {
+      x!.style.display = "block";
+      
+    } else {
+      x!.style.display = "none";
+      
+    }
+  
+  }
+
+  editComment(CommentDTO:any){
+  
+  
+    this.homeService.editComment(CommentDTO).subscribe((result) => {
+      if(result){
+        this.commentDTO=new CommentDTO();
+        this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+        
+      }
+    });
   }
   }

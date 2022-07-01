@@ -88,7 +88,7 @@ Communities<div  *ngFor = "let community1 of communities,let i = index">
     </form>
     </div>
 
-    <div id="addCommunity" style="display: block;" div class="bg-light p-4 rounded" >
+    <div id="addCommunity" style="display: none;" div class="bg-light p-4 rounded" >
         <h2>Edit Community</h2>
         <form   (ngSubmit)="editCommunity(community1)">
           <div class="row mb-3">

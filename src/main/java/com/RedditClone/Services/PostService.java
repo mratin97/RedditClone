@@ -75,16 +75,16 @@ public class PostService {
 
     }
 
-    public void updPost(Post post, User user){
+    public void updPost(Post post){
 
-        Post newPost= new Post();
+        Post newPost= postRepository.getById(post.getId());
 
-        newPost.setFlair(post.getFlair());
-        newPost.setCreationDate(post.getCreationDate());
+
+
         newPost.setText(post.getText());
-        newPost.setUser(user);
-        newPost.setCommunity(newPost.getCommunity());
-        newPost.setImgPath(post.getImgPath());
+
+
+
         newPost.setTitle(post.getTitle());
         postRepository.save(newPost);
 
